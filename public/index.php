@@ -7,5 +7,6 @@
 include __DIR__.'/../vendor/autoload.php';
 
 $ws = new \Weverest\Weservice\Weservice();
+$ws->register(new Service\One\OneService());
+$ws->register(new Service\Two\TwoService());
 $ws->run();
-
