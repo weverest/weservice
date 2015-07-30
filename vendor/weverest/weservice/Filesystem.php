@@ -5,7 +5,7 @@ use Weverest\Weservice\Exception\Run;
  * Class Filesystem
  * @package Weverest\Run
  */
-trait Filesystem{
+class Filesystem{
     /**
      * @var Service $service
      * @var \ReflectionClass $reflex
@@ -22,8 +22,9 @@ trait Filesystem{
     private $routes = 'routes';
 
 
-    public function __construct(){
-        $this->reflex = new \ReflectionClass($this);
+    public function __construct( Service $service){
+        $this->service = $service;
+        $this->reflex = new \ReflectionClass($service);
     }
 
     /**

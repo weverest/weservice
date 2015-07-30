@@ -5,6 +5,19 @@ namespace Weverest\Weservice;
  * @package Weverest\Weservice
  */
 class Service{
-    use Filesystem;
+    /**
+     * @var string $serviceName
+     */
+    private $serviceName;
 
+    /**
+     * @param $name
+     */
+    public function setServiceName($name){
+        $this->serviceName = $name;
+    }
+
+    public function getServiceName(){
+        return $this->serviceName;
+    }
 }

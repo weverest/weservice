@@ -1,6 +1,5 @@
 <?php
 namespace Weverest\Weservice;
-use Service\One\OneService;
 use Weverest\Weservice\Collection;
 
 /**
@@ -10,16 +9,14 @@ use Weverest\Weservice\Collection;
 class Weservice{
 
     /**
-     * @var array $register;
-     * @var Service $collection;
+     * @var Collection\Service $collection;
      */
-    private $register;
     private $collection;
 
     public function __construct(){
-        $this->collection = new Service();
+        $this->collection = new Collection\Service();
         //Set environment level
-        //$this->environment('development');
+        $this->environment('development');
     }
 
     /**
@@ -54,12 +51,12 @@ class Weservice{
      * @param Service $service
      */
     public function register(Service $service){
-        $this->register[] = $service;
+        $this->collection->append($service);
     }
 
     public function run(){
         $run = new Run();
-        $run->init();
+        $run->init($this->collection);
     }
 
 }
