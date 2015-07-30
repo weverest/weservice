@@ -1,0 +1,29 @@
+{
+  "name": "weverest/weservice",
+  "description": "WebService",
+  "license": "MIT",
+  "homepage": "http://marciomrs4.github.io/sgv/",
+  "authors": [
+    {
+      "name": "Team weverest",
+      "email": "we-weverest@we-weverest.com.br"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "slim/slim": "2.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.7.*"
+  },
+  "suggest": {
+    "Apache2 Web Server": "*",
+    "Composer Autoload for Autoload": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Weverest\\Weservice\\": "vendor/weverest/weservice",
+      "Service\\":"service/"
+    }
+  }
+}
