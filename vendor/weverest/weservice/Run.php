@@ -1,6 +1,6 @@
 <?php
 namespace Weverest\Weservice;
-
+use Weverest\Weservice\Exception\RunException;
 /**
  * Class Run
  * @package Weverest\Weservice
@@ -14,12 +14,16 @@ class Run{
         // Check registered services
         if($collection->registered() > 0){
             $serviceInstance = $collection->getService($serviceName);
+            // If service exists
             if($serviceInstance) {
-
+                $middleware = new Middleware($serviceInstance);
+                $middleware->runService();
             }else
-                throw new \Weverest\Weservice\Exception\Run('Service not found.', 404);
+                throw new RunException('Service not found.', 404);
         } else
-            throw new \Weverest\Weservice\Exception\Run('Web Service Unavailable.', 503);
+            throw new RunException('Web Service Unavailable.', 503);
 
     }
+
+
 }

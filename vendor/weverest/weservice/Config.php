@@ -1,25 +1,50 @@
 <?php
 namespace Weverest\Weservice;
-use Weverest\Weservice\Exception\Run;
+use Weverest\Weservice\Exception\RunException;
 
 /**
- * trait Config
+ * class Config
  * @package Weverest\Weservice
  */
-trait Config{
+class Config{
+
+    private $path;
+    private $config;
+
+    public function __construct($path){
+        $this->path = $path;
+        $this->config = $this->setConfig();
+        return $this;
+    }
+
     /**
-     * Load configuration file
-     * @param $filePath
-     * @return mixed
-     * @throws Run
+     * @return array
+     * @throws RunException
      */
-    public function getConfig($filePath){
-        if(file_exists($filePath)) {
-            $data = include($filePath);
+    public function setConfig(){
+        if(file_exists($this->path)) {
+            $data = include($this->path);
 
             if(is_array($data))
                 return $data;
         }
-        throw new Run('Filed to load '.$filePath);
+        throw new RunException('Filed to load '.$this->path);
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfig(){
+        return $this->config;
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function getAttribute($name){
+        if(isset($this->config[$name]))
+            return $this->config[$name];
+        return null;
     }
 }

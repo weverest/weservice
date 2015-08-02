@@ -1,6 +1,6 @@
 <?php
 namespace Weverest\Weservice;
-use Weverest\Weservice\Exception\Run;
+use Weverest\Weservice\Exception\Run as RunException;
 /**
  * Class Filesystem
  * @package Weverest\Run
@@ -22,31 +22,31 @@ class Filesystem{
     private $routes = 'routes';
 
 
-    public function __construct( Service $service){
+    public function __construct(Service $service){
         $this->service = $service;
         $this->reflex = new \ReflectionClass($service);
     }
 
     /**
      * @param $configPath
-     * @throws Run
+     * @throws RunException
      */
     public function setConfigPath($configPath){
         if(is_dir($configPath))
             $this->config = $configPath;
         else
-            throw new Run('Config path not exist. ' . $configPath);
+            throw new RunException('Config path not exist. ' . $configPath);
     }
 
     /**
      * @return string
-     * @throws Run
+     * @throws RunException
      */
     public function getConfigPath(){
         if(!is_dir($this->config)){
             $this->config = $this->getServicePath() . $this->config . DIRECTORY_SEPARATOR;
             if(!is_dir($this->config))
-                throw new Run('The directory '.$this->config . ' does not exist.');
+                throw new RunException('The directory '.$this->config . ' does not exist.');
         }
 
         return $this->config;
@@ -54,55 +54,55 @@ class Filesystem{
 
     /**
      * @return string
-     * @throws Run
+     * @throws RunException
      */
     public function getRepositoryPath()
     {
         if(!is_dir($this->repository)){
             $this->config = $this->getServicePath() . $this->repository . DIRECTORY_SEPARATOR;
             if(!is_dir($this->repository))
-                throw new Run('The directory '.$this->repository . ' does not exist.');
+                throw new RunException('The directory '.$this->repository . ' does not exist.');
         }
         return $this->repository;
     }
 
     /**
      * @param $repositoryPath
-     * @throws Run
+     * @throws RunException
      */
     public function setRepositoryPath($repositoryPath)
     {
         if(is_dir($repositoryPath))
             $this->repository = $repositoryPath;
         else
-            throw new Run('Repository path not exist. ' . $repositoryPath);
+            throw new RunException('Repository path not exist. ' . $repositoryPath);
         $this->repository = $repositoryPath;
     }
 
     /**
      * @return string
-     * @throws Run
+     * @throws RunException
      */
     public function getRoutesPath()
     {
         if(!is_dir($this->routes)){
             $this->routes = $this->getServicePath() . $this->routes . DIRECTORY_SEPARATOR;
             if(!is_dir($this->routes))
-                throw new Run('The directory '.$this->routes . ' does not exist.');
+                throw new RunException('The directory '.$this->routes . ' does not exist.');
         }
         return $this->routes;
     }
 
     /**
      * @param $routesPath
-     * @throws Run
+     * @throws RunException
      */
     public function setRoutesPath($routesPath)
     {
         if(is_dir($routesPath))
             $this->repository = $routesPath;
         else
-            throw new Run('Routes path not exist. ' . $routesPath);
+            throw new RunException('Routes path not exist. ' . $routesPath);
         $this->routes = $routesPath;
     }
 

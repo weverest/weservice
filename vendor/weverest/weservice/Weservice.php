@@ -1,6 +1,7 @@
 <?php
 namespace Weverest\Weservice;
 use Weverest\Weservice\Collection;
+use Weverest\Weservice\Exception\RunException;
 
 /**
  * Class Weservice
@@ -54,9 +55,16 @@ class Weservice{
         $this->collection->append($service);
     }
 
+    /**
+     * Execute Weservice
+     * @return void
+     */
     public function run(){
         $run = new Run();
-        $run->init($this->collection);
+        try {
+            $run->init($this->collection);
+        } catch(RunException $e) {
+            Error::show($e->getMessage());
+        }
     }
-
 }
