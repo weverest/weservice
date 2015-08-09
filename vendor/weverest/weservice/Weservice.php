@@ -10,12 +10,12 @@ use Weverest\Weservice\Exception\RunException;
 class Weservice{
 
     /**
-     * @var Collection\Service $collection;
+     * @var Collection\Services $collection;
      */
     private $collection;
 
     public function __construct(){
-        $this->collection = new Collection\Service();
+        $this->collection = new Collection\Services();
         //Set environment level
         $this->environment('development');
     }

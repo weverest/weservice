@@ -1,5 +1,9 @@
 <?php
 namespace Weverest\Weservice;
+use Weverest\Weservice\Config\AuthorizationConfig;
+use Weverest\Weservice\Config\DatabaseConfig;
+use Weverest\Weservice\Config\Parse;
+use Weverest\Weservice\Config\ServiceConfig;
 use Weverest\Weservice\Database\Repository;
 
 /**
@@ -8,11 +12,15 @@ use Weverest\Weservice\Database\Repository;
 class Middleware{
     /**
      * @var Service $service
-     * @var Config $service
+     * @var ServiceConfig $serviceConfig
+     * @var DatabaseConfig $databaseConfig
+     * @var AuthorizationConfig $authorizationConfig
      * @var Filesystem $service
      */
     private $service;
-    private $config;
+    private $serviceConfig;
+    private $databaseConfig;
+    private $authorizationConfig;
     private $fs;
 
     /**
@@ -28,20 +36,7 @@ class Middleware{
     }
 
     private function setServiceConfig(){
-        //Service Config
-        $this->config['service'] = new Config($this->fs->getConfigPath() . 'service.php');
-        $this->config['auth'] =  new Config($this->fs->getConfigPath() . 'authorization.php');
-        $this->config['database'] =  new Config($this->fs->getConfigPath() . 'database.php');
-//        $driver = $this->config['database']->getAttribute('default');
-//        $host = $this->config['database']->getAttribute('connections')['host'];
-//        $username = $this->config['database']->getAttribute('connections')['username'];
-//        $password = $this->config['database']->getAttribute('connections')['password'];
-//        $db = $this->config['database']->getAttribute('connections')['database'];
-
-        $repository = new Repository('mysql:host=localhost;dbname=test', 'root', '');
+       
     }
 
-    private function setDbConnection(){
-
-    }
 }

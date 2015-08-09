@@ -1,50 +1,41 @@
 <?php
 namespace Weverest\Weservice;
-use Weverest\Weservice\Exception\RunException;
+use Weverest\Weservice\Config\AuthorizationConfig;
+use Weverest\Weservice\Config\DatabaseConfig;
+use Weverest\Weservice\Config\ServiceConfig;
 
 /**
- * class Config
+ * Class Config
  * @package Weverest\Weservice
  */
 class Config{
 
-    private $path;
-    private $config;
-
-    public function __construct($path){
-        $this->path = $path;
-        $this->config = $this->setConfig();
-        return $this;
+    /**
+     * @return ServiceConfig
+     */
+    public function service(){
+        return new ServiceConfig();
     }
 
     /**
-     * @return array
-     * @throws RunException
+     * @return DatabaseConfig
      */
-    public function setConfig(){
-        if(file_exists($this->path)) {
-            $data = include($this->path);
-
-            if(is_array($data))
-                return $data;
-        }
-        throw new RunException('Filed to load '.$this->path);
+    public function database(){
+        return new DatabaseConfig();
     }
 
     /**
-     * @return array
+     * @return AuthorizationConfig
      */
-    public function getConfig(){
-        return $this->config;
+    public function authorization(){
+        return new AuthorizationConfig();
     }
 
     /**
-     * @param $name
-     * @return mixed
+     * @return ServiceConfig
      */
-    public function getAttribute($name){
-        if(isset($this->config[$name]))
-            return $this->config[$name];
-        return null;
+    public static function newConfig(){
+        return new ServiceConfig();
     }
+
 }

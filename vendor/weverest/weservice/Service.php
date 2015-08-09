@@ -4,20 +4,27 @@ namespace Weverest\Weservice;
  * Class Service
  * @package Weverest\Weservice
  */
-class Service{
+abstract class Service{
     /**
-     * @var string $serviceName
+     * @var Config $config
+     * @var Filesystem $fileSystem
      */
-    private $serviceName;
+    private $config;
 
     /**
-     * @param $name
+     * @param Config $config
      */
-    public function setServiceName($name){
-        $this->serviceName = $name;
+    protected function setConfig(Config $config){
+        $this->config = $config;
     }
 
-    public function getServiceName(){
-        return $this->serviceName;
+    /**
+     * @return Config
+     */
+    public function getConfig(){
+        if(!isset($this->config))
+            $this->config = new Config();
+
+        return $this->config;
     }
 }

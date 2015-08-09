@@ -5,6 +5,7 @@ namespace Weverest\Weservice;
  * @package Weverest\Weservice
  */
 class Error{
+
     /**
      * @param $message
      * @param bool $return

@@ -5,6 +5,14 @@ namespace Weverest\Weservice\Request;
  * @package Weverest\Weservice\Request
  */
 class Resolver{
+
+    /**
+     * @return null|string
+     */
+    public static function getService(){
+        return self::getParam(0);
+    }
+
     /**
      * Return webservice uri
      * @return string

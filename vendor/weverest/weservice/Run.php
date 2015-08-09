@@ -1,16 +1,17 @@
 <?php
 namespace Weverest\Weservice;
 use Weverest\Weservice\Exception\RunException;
+use Weverest\Weservice\Request\Resolver;
+
 /**
  * Class Run
  * @package Weverest\Weservice
  */
 class Run{
 
-    public function init(Collection\Service $collection){
-        $service = new Request\Service();
+    public function init(Collection\Services $collection){
         //Get Service Name
-        $serviceName = $service->getService();
+        $serviceName = Resolver::getService();
         // Check registered services
         if($collection->registered() > 0){
             $serviceInstance = $collection->getService($serviceName);

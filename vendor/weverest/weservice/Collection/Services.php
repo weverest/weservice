@@ -1,13 +1,11 @@
 <?php
 namespace Weverest\Weservice\Collection;
-use Weverest\Weservice\Service as TheService;
-use Weverest\Weservice\Weservice;
-
+use Weverest\Weservice\Service;
 /**
- * Class ServiceCollection
+ * Class Services
  * @package Weverest\Weservice
  */
-class Service{
+class Services{
     /**
      * @var array $services
      * @var array $nameServices
@@ -16,15 +14,12 @@ class Service{
     private $serviceName;
 
     /**
-     * @param TheService $service
+     * @param Service $service
      */
-    public function append(TheService $service){
+    public function append(Service $service){
         $this->services[] = $service;
-        $name = $service->getServiceName();
-        if(isset($name))
-            $this->serviceName[] = $name;
-        else
-            $this->serviceName[] = get_class($service);
+        $class_name = explode('\\', get_class($service));
+        $this->serviceName[] = strtolower(end($class_name));
     }
 
     /**
